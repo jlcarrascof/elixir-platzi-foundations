@@ -170,3 +170,106 @@ Grapheme.frequencies("elixir")
 ### Dudas y Preguntas
 
 *(Sin dudas registradas en esta sesión)*
+
+---
+
+## Capítulo 3: Primeros Pasos con Elixir
+
+### Resumen del Video
+
+Este capítulo muestra cómo instalar Elixir y usar su consola interactiva (IEx) por primera vez.
+
+### Instalación de Elixir
+
+**Pasos generales:**
+1. Ir al sitio oficial de Elixir (elixir-lang.org)
+2. Ir a la pestaña "Install"
+3. Seleccionar tu sistema operativo (MacOS, Linux, Windows)
+4. Seguir las instrucciones según tu manejador de paquetes
+
+**Para MacOS (con Homebrew):**
+```bash
+# Ver información del paquete
+brew info elixir
+
+# Instalar Elixir
+brew install elixir
+```
+
+**Nota importante:** Elixir depende de Erlang. Si no lo tienes instalado, el manejador de paquetes lo instalará automáticamente.
+
+### Verificar la Instalación
+
+**Para verificar la versión instalada:**
+```bash
+elixir -v
+```
+
+Esto mostrará:
+- Versión de Erlang/OTP
+- Versión de Elixir
+
+**Ejemplo de salida:**
+```
+Erlang/OTP 26 [erts-14.2.5] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [jit:ns]
+Elixir 1.16.3 (compiled with Erlang/OTP 26)
+```
+
+### IEx: Consola Interactiva de Elixir
+
+**¿Qué es IEx?**
+- IEx = Interactive Elixir
+- Es como una calculadora poderosa donde puedes probar código de Elixir
+- Similar a la consola de Python (REPL)
+
+**Para iniciar IEx:**
+```bash
+iex
+```
+
+**Para salir de IEx:**
+- Presiona `Ctrl+C` dos veces
+- O escribe `System.halt()`
+
+**Ejemplo de uso:**
+```elixir
+iex(1)> 1 + 1
+2
+iex(2)> 2 * 3
+6
+iex(3)> 10 / 2
+5.0
+```
+
+### Ejecutables Incluidos con Elixir
+
+Al instalar Elixir, obtienes varios ejecutables:
+- `elixir` - Para ejecutar archivos .ex
+- `iex` - Consola interactiva
+- `mix` - Herramienta de construcción (como npm para Node.js)
+- `elixirc` - Compilador de Elixir
+
+**Reto del video:** Ir a la documentación oficial y explorar qué otros ejecutables vienen incluidos.
+
+### Contexto Adicional
+
+**¿Por qué usar IEx?**
+- Es perfecto para experimentar con código
+- Puedes probar funciones sin crear archivos
+- Aprender la sintaxis de forma interactiva
+- Depurar código rápidamente
+
+**Analogía para niños:**
+- IEx es como un patio de recreo donde puedes probar diferentes juguetes (código) sin tener que construir toda la casa (programa completa)
+
+**Sistemas operativos soportados:**
+- MacOS (Homebrew, MacPorts)
+- Linux (varias distribuciones)
+- Windows (instalador oficial, Chocolatey)
+
+### Dudas y Preguntas
+
+**¿Cómo salgo de la terminal iex?**
+Para salir de IEx, puedes:
+1. Presionar `Ctrl+C` dos veces seguidas
+2. Escribir `System.halt()` y presionar Enter
