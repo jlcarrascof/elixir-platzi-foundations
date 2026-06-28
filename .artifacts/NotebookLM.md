@@ -460,3 +460,247 @@ export PATH="$HOME/.asdf/installs/elixir/1.18.0/.mix/escripts:$PATH"
 - asdf moderno maneja esto automáticamente con shims
 - Pero los escripts de Mix necesitan PATH manual
 - La ruta es específica de la versión de Elixir instalada
+
+---
+
+## Capítulo 5: Tipos de Datos Básicos - Parte 1
+
+### Resumen del Video
+
+Este capítulo explora los tipos de datos básicos que soporta Elixir: enteros, flotantes, booleanos, átomos, cadenas, listas y tuplas. Se practica en Livebook con operaciones aritméticas y funciones de documentación.
+
+### Tipos de Datos Básicos en Elixir
+
+**Elixir soporta:**
+- Enteros (integers)
+- Flotantes (decimales)
+- Booleanos (true/false)
+- Listas
+- Tuplas
+- Mapas
+- Átomos (símbolos)
+- Cadenas (strings)
+
+### Operaciones Aritméticas
+
+**En Livebook:**
+1. Crear un nuevo notebook
+2. Agregar celdas de código
+3. Evaluar con el botón "Evaluate"
+
+**Operaciones básicas:**
+```elixir
+# Suma
+1 + 1
+# => 2
+
+# Multiplicación
+2 * 3
+# => 6
+
+# División (siempre devuelve flotante)
+10 / 2
+# => 5.0
+```
+
+**División entera:**
+```elixir
+# div/2 - división entera
+div(10, 3)
+# => 3
+
+# rem/2 - remanente de la división
+rem(10, 3)
+# => 1
+```
+
+**Nota sobre paréntesis:**
+- Elixir no obliga a usar paréntesis
+- Esto hace el código más limpio
+- Se recomienda paréntesis para funciones normales
+- Sin paréntesis para funciones de control de flujo
+
+**Funciones de redondeo:**
+```elixir
+# round/1 - redondea al entero más cercano
+round(3.58)
+# => 4
+
+# trunc/1 - corta la parte decimal
+trunc(3.58)
+# => 3
+```
+
+**Números flotantes:**
+- Tienen doble precisión de 64 bits
+- Siempre devuelven decimales en operaciones
+
+### Identificando Funciones y Documentación
+
+**Cómo se identifica una función:**
+- Nombre del módulo
+- Nombre de la función
+- Número de argumentos (aridad)
+
+**Ejemplo:** `div/2` significa función `div` con 2 argumentos.
+
+**En IEx (consola interactiva):**
+```elixir
+# h/1 - muestra documentación de una función
+h(trunc)
+```
+
+**En Livebook:**
+- Pasa el cursor sobre el nombre de la función
+- Aparece la documentación automáticamente
+- También funciona para módulos
+
+**Módulo Kernel:**
+- Es autoimportado (no necesitas escribir el nombre)
+- Contiene funciones básicas como `div`, `rem`, `round`, `trunc`
+
+### Valores Booleanos
+
+**Elixir soporta:**
+- `true`
+- `false`
+
+**Operaciones:**
+```elixir
+# Comparación
+true == false
+# => false
+
+# Verificar tipo de dato
+is_boolean(true)
+# => true
+
+is_boolean(1)
+# => false
+```
+
+**Funciones de verificación de tipo:**
+- `is_boolean/1` - ¿es booleano?
+- `is_integer/1` - ¿es entero?
+- `is_float/1` - ¿es flotante?
+- `is_number/1` - ¿es número?
+
+### Átomos (Símbolos)
+
+**¿Qué es un átomo?**
+- Una constante cuyo valor es su propio nombre
+- En otros lenguajes se llaman "símbolos"
+- Se usan para enumerar valores
+
+**Ejemplos:**
+```elixir
+:apple
+:orange
+:water
+```
+
+**Comparaciones:**
+```elixir
+:apple == :orange
+# => false
+```
+
+**Usos comunes:**
+- Expresar estado de operaciones
+- `:ok` - operación exitosa
+- `:error` - operación fallida
+
+**Booleanos son átomos:**
+```elixir
+# true y false también son átomos
+is_atom(true)
+# => true
+
+is_atom(:ok)
+# => true
+```
+
+**Alias (módulos):**
+- Comienzan con letra mayúscula
+- También son átomos
+- Ejemplo: `Hello` es un átomo
+
+```elixir
+is_atom(Hello)
+# => true
+```
+
+### Cadenas (Strings)
+
+**Cadenas básicas:**
+```elixir
+"hello world"
+```
+
+**Interpolación:**
+```elixir
+name = "world"
+
+"hello #{name}"
+# => "hello world"
+```
+
+**Saltos de línea:**
+```elixir
+"hello\nworld"
+```
+
+**Imprimir cadenas:**
+```elixir
+IO.puts("hello\nworld")
+# hello
+# world
+# => :ok
+```
+
+**Nota:** `IO.puts/1` devuelve `:ok` como resultado, pero tiene el efecto secundario de imprimir.
+
+**Módulo String:**
+```elixir
+# length/1 - longitud de la cadena
+String.length("hello")
+# => 5
+
+# upcase/1 - convertir a mayúsculas
+String.upcase("hello")
+# => "HELLO"
+```
+
+### Organización de Celdas en Livebook
+
+**Reordenar celdas:**
+- Puedes mover celdas arriba/abajo
+- Útil si cometiste un error en el orden
+- Arrastra y suelta
+
+### Contexto Adicional
+
+**Por qué Elixir es especial:**
+- Documentación excelente
+- Muchas funciones incluyen ejemplos
+- Livebook muestra documentación automáticamente
+
+**Analogía para niños:**
+- **Enteros:** Como contar manzanas enteras (1, 2, 3)
+- **Flotantes:** Como medir con regla (1.5, 2.7, 3.14)
+- **Booleanos:** Como responder sí o no (true/false)
+- **Átomos:** Como etiquetas con nombres (:rojo, :verde, :azul)
+- **Cadenas:** Como escribir cartas ("hola mundo")
+
+**Diferencia clave:**
+- `div(10, 3)` → 3 (división entera)
+- `10 / 3` → 3.333... (división flotante)
+
+**Arity (número de argumentos):**
+- Es importante en Elixir
+- `round/1` vs `round/2` son funciones diferentes
+- La documentación siempre muestra la aridad
+
+### Dudas y Preguntas
+
+*(Sin dudas registradas en esta sesión)*
