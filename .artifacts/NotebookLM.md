@@ -273,3 +273,190 @@ Al instalar Elixir, obtienes varios ejecutables:
 Para salir de IEx, puedes:
 1. Presionar `Ctrl+C` dos veces seguidas
 2. Escribir `System.halt()` y presionar Enter
+
+---
+
+## Capítulo 4: Introducción a Livebook
+
+### Resumen del Video
+
+Este capítulo introduce Livebook, una herramienta del ecosistema Elixir para crear notebooks interactivos con celdas de código y markdown.
+
+### ¿Qué es Livebook?
+
+**Livebook es como un cuaderno mágico:**
+- Puedes crear notebooks con celdas de código Elixir
+- También tiene celdas de texto en formato markdown
+- Es perfecto para prototipado rápido
+- Autores de librerías pueden crear tutoriales interactivos
+
+**Casos de uso:**
+- Prototipado rápido de ideas
+- Tutoriales interactivos de librerías
+- Aprendizaje de Elixir
+- Documentación ejecutable
+
+### Instalación de Livebook
+
+**Opciones de instalación:**
+1. **Local con Elixir** (la que usamos)
+2. **Docker**
+3. **Servicio en la nube** (Fly.io)
+
+**Pasos para instalación local:**
+
+1. **Instalar Rebar3** (herramienta para construir proyectos Erlang)
+   ```bash
+   mix local.rebar --force
+   ```
+
+2. **Instalar Hex** (manejador de paquetes del ecosistema Erlang/Elixir)
+   ```bash
+   mix local.hex --force
+   ```
+
+3. **Instalar Livebook desde Hex**
+   ```bash
+   mix escript.install hex livebook
+   ```
+
+### ¿Qué es un Script (Escript)?
+
+**Analogía:** Un script es como un programa portable que puedes ejecutar desde la terminal.
+
+**Características:**
+- Es un ejecutable que se invoca desde la línea de comandos
+- Puede correr en cualquier plataforma donde tengas Erlang/Elixir
+- No necesita instalar Elixir porque está embebido en el script
+- Livebook es un ejemplo de escript
+
+### Configurar el PATH
+
+**¿Por qué agregar al PATH?**
+Para poder ejecutar `livebook` desde cualquier lugar sin escribir la ruta completa.
+
+**En el video (Mac con fish):**
+```bash
+fish_add_path ~/.mix/escripts
+```
+
+**En Linux (bash):**
+```bash
+export PATH="$HOME/.asdf/installs/elixir/1.18.0/.mix/escripts:$PATH"
+```
+
+**Para hacerlo permanente:**
+```bash
+echo 'export PATH="$HOME/.asdf/installs/elixir/1.18.0/.mix/escripts:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Ejecutar Livebook
+
+**Para iniciar Livebook:**
+```bash
+livebook server
+```
+
+**Opciones adicionales:**
+- Por defecto usa tu home directory
+- Puedes especificar otro directorio con `--home`
+
+**Livebook genera un servidor web:**
+- Necesitas ir al navegador para verlo
+- Te pedirá un token de seguridad
+- El token aparece en la terminal
+
+### Conceptos Clave: Celdas
+
+**La unidad básica de Livebook es la CELDA:**
+
+**Celdas de Markdown:**
+- Contienen texto formateado
+- Títulos, listas, explicaciones
+- Como documentos de documentación
+
+**Celdas de Código:**
+- Contienen código Elixir
+- Al ejecutarlas, evalúan código Elixir real
+- Es como IEx pero con un editor visual
+
+**Analogía para niños:**
+- Livebook es como IEx (la consola) + un editor de texto
+- Es como tener una pizarra mágica donde escribes código y se ejecuta solo
+
+### Celdas Inteligentes
+
+**Livebook tiene celdas especiales:**
+- Pueden generar gráficos
+- Pueden conectarse a bases de datos (PostgreSQL, MySQL)
+- Pueden instalar paquetes de Elixir y Erlang
+- Requieren reiniciar la sesión para instalar dependencias
+
+**Ejemplo de conexión a base de datos:**
+1. Seleccionar celda inteligente de PostgreSQL
+2. Livebook pide reiniciar la sesión
+3. Llenar el cuadro de diálogo con datos de conexión
+4. Puedes hacer queries directamente desde Livebook
+
+### Instalar Paquetes en Livebook
+
+**Puedes instalar paquetes directamente:**
+- Paquetes de Elixir
+- Paquetes de Erlang
+- Usarlos mientras defines tu prototipo
+
+**Esto es útil porque:**
+- No necesitas salir de Livebook
+- Todo está en un solo lugar
+- Puedes experimentar rápidamente
+
+### Reto del Video
+
+**Orden recomendado de notebooks a explorar:**
+1. Welcome to Livebook
+2. Elixir and Livebook
+
+### Contexto Adicional
+
+**Livebook vs Jupyter:**
+- Livebook es para Elixir (como Jupyter es para Python)
+- Pero Livebook tiene características únicas del ecosistema Elixir
+
+**Ventajas de Livebook:**
+- Interfaz moderna
+- Celdas inteligentes
+- Integración con bases de datos
+- Colaboración en tiempo real
+- Despliegue fácil
+
+**Analogía para niños:**
+- Livebook es como un laboratorio de ciencias donde tienes:
+  - Una pizarra para escribir (markdown)
+  - Un microscopio para experimentar (código)
+  - Herramientas especiales para conectar cosas (celdas inteligentes)
+
+### Dudas y Preguntas
+
+**Problema: Livebook requiere Elixir 1.18+ pero tenía 1.16.3**
+**Solución:** Actualizar Elixir usando asdf:
+```bash
+asdf install elixir 1.18.0
+asdf global elixir 1.18.0
+```
+
+**Problema: livebook server dice "command not found"**
+**Causa:** Livebook se instaló pero no está en el PATH
+**Solución:** Agregar la ruta de escripts al PATH:
+```bash
+export PATH="$HOME/.asdf/installs/elixir/1.18.0/.mix/escripts:$PATH"
+```
+
+**¿Necesito instalar Hex y Rebar manualmente?**
+- **Hex:** Viene incluido con Elixir moderno, pero `mix local.hex --force` asegura que esté actualizado
+- **Rebar3:** Solo si necesitas compilar dependencias puras de Erlang
+
+**¿Necesito agregar el PATH con asdf?**
+- asdf moderno maneja esto automáticamente con shims
+- Pero los escripts de Mix necesitan PATH manual
+- La ruta es específica de la versión de Elixir instalada
