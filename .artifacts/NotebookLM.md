@@ -704,3 +704,247 @@ String.upcase("hello")
 ### Dudas y Preguntas
 
 *(Sin dudas registradas en esta sesión)*
+
+---
+
+## Capítulo 6: Tipos de Datos Básicos - Parte 2
+
+### Resumen del Video
+
+Este capítulo continúa explorando los tipos de datos básicos de Elixir: funciones anónimas, listas y tuplas. Se practica en Livebook con ejemplos prácticos.
+
+### Funciones Anónimas
+
+**¿Qué son las funciones anónimas?**
+- Son funciones sin nombre
+- Pueden ser asignadas a variables
+- Se pueden pasar como argumentos
+- Están delimitadas por `fn` y `end`
+
+**Sintaxis:**
+```elixir
+# Definir función anónima
+add = fn a, b -> a + b end
+
+# Invocar función anónima
+add.(1, 2)
+# => 3
+```
+
+**Nota importante:** Para invocar una función anónima, se usa un punto `.` antes de los paréntesis.
+
+**Verificar si es una función:**
+```elixir
+# is_function/1 - verifica si es función
+is_function(add)
+# => true
+
+# is_function/2 - verifica si es función con N argumentos
+is_function(add, 2)
+# => true
+```
+
+### Clausuras (Closures)
+
+**¿Qué es una clausura?**
+- Las funciones anónimas pueden acceder a variables del alcance donde fueron definidas
+- Esto se llama "closure" o clausura
+
+**Ejemplo:**
+```elixir
+# Función que suma
+add = fn a, b -> a + b end
+
+# Función que usa la función anterior
+double = fn x -> add.(x, x) end
+
+double.(2)
+# => 4
+```
+
+### Alcance de Variables (Scope)
+
+**Regla importante:** Una variable definida fuera del alcance de una función NO puede ser redefinida dentro de la función.
+
+**Ejemplo:**
+```elixir
+x = 42
+
+# Intentar redefinir x dentro de la función
+# Esto NO funcionará
+change_x = fn -> x = 0 end
+```
+
+**Analogía para niños:**
+- Imagina que tienes una caja con tu nombre afuera
+- Dentro de la caja no puedes cambiar el nombre de la caja
+- Solo puedes mirar lo que hay dentro
+
+### Listas
+
+**¿Qué son las listas?**
+- Colecciones de valores
+- Usan corchetes `[]`
+- Pueden contener cualquier tipo de dato
+
+**Sintaxis:**
+```elixir
+[1, 2, 3, true]
+```
+
+**Funciones de listas:**
+```elixir
+# length/1 - longitud de la lista
+length([1, 2, 3])
+# => 3
+```
+
+**Concatenar listas:**
+```elixir
+# ++ - concatenar
+[1, 2] ++ [3, 4]
+# => [1, 2, 3, 4]
+```
+
+**Restar elementos:**
+```elixir
+# -- - restar elementos
+[1, 2, 3, true] -- [true]
+# => [1, 2, 3]
+```
+
+**Nota importante sobre la resta:**
+- Solo elimina la PRIMERA coincidencia
+- Ejemplo: `[true, false, 3, true] -- [false, true]` solo elimina `false` y la primera `true`
+
+### Inmutabilidad
+
+**Concepto clave:** Las estructuras de datos en Elixir son INMUTABLES.
+
+**¿Qué significa?**
+- Concatenar o remover elementos SIEMPRE retorna una lista NUEVA
+- La lista original NO se modifica
+- Las operaciones transforman datos, no los mutan
+
+**Ventajas de la inmutabilidad:**
+- Código más limpio
+- Puedes pasar datos con garantía de que no serán modificados
+- Sin efectos secundarios inesperados
+
+**Analogía para niños:**
+- **Mutable:** Como una pizarra donde borras y escribes (la pizarra cambia)
+- **Inmutable:** Como una hoja de papel donde escribes una nueva (la hoja original sigue igual)
+
+### Cabeza y Cola de Listas
+
+**Conceptos importantes:**
+- **Head (cabeza):** Primer elemento de la lista
+- **Tail (cola):** Resto de los elementos
+
+**Funciones:**
+```elixir
+lista = [1, 2, 3]
+
+# hd/1 - obtener primer elemento
+hd(lista)
+# => 1
+
+# tl/1 - obtener resto de elementos
+tl(lista)
+# => [2, 3]
+```
+
+**Advertencia:** Si intentas obtener `hd` o `tl` de una lista vacía, obtendrás un error.
+
+### Tuplas
+
+**¿Qué son las tuplas?**
+- Colecciones de valores
+- Usan llaves `{}`
+- Pueden contener diferentes tipos de datos
+
+**Sintaxis:**
+```elixir
+{:ok, "hello"}
+```
+
+**Características:**
+- Se almacenan de manera contigua en memoria
+- Acceso rápido por índice
+- Obtener tamaño es rápido
+
+**Funciones de tuplas:**
+```elixir
+# tuple_size/1 - tamaño de la tupla
+tuple_size({:ok, "hello"})
+# => 2
+
+# elem/2 - obtener elemento por índice
+elem({:ok, "hello"}, 0)
+# => :ok
+
+elem({:ok, "hello"}, 1)
+# => "hello"
+```
+
+**Nota:** Los índices comienzan desde 0.
+
+**Poner elemento en tupla:**
+```elixir
+# put_elem/3 - poner elemento en índice (retorna nueva tupla)
+put_elem({:ok, "hello"}, 1, "world")
+# => {:ok, "world"}
+
+# La tupla original NO cambia
+{:ok, "hello"}
+# => {:ok, "hello"}
+```
+
+### Listas vs Tuplas
+
+**¿Cuándo usar listas:**
+- Cuando necesitas agregar/remover elementos frecuentemente
+- Cuando el orden es importante
+- Cuando la cantidad de elementos puede variar
+
+**¿Cuándo usar tuplas:**
+- Cuando tienes un número fijo de elementos
+- Cuando necesitas acceso rápido por índice
+- Cuando representas datos estructurados (como `{:ok, resultado}`)
+
+### Contexto Adicional
+
+**Funciones anónimas vs funciones con nombre:**
+- Las funciones anónimas son útiles para callbacks
+- Las funciones con nombre se definen en módulos (veremos más adelante)
+
+**Operadores de lista:**
+- `++` es O(n) - depende del tamaño de la lista izquierda
+- `--` es O(n*m) - depende de ambos tamaños
+- Úsalos con cuidado en listas grandes
+
+**Analogía para niños:**
+- **Función anónima:** Como una receta sin nombre que puedes guardar en una caja
+- **Lista:** Como un tren con vagones (puedes agregar/quitar vagones)
+- **Tupla:** Como una caja con compartimentos fijos (rápido de encontrar, difícil de cambiar)
+
+**Inmutabilidad en la práctica:**
+```elixir
+# Esto NO modifica la lista original
+lista = [1, 2, 3]
+nueva_lista = [0] ++ lista
+
+# lista sigue siendo [1, 2, 3]
+# nueva_lista es [0, 1, 2, 3]
+```
+
+### Reto del Video
+
+**Crear un conversor de monedas:**
+- Función anónima que recibe dólares americanos
+- Convierte a pesos colombianos
+- Ejemplo: `100 USD → X pesos`
+
+### Dudas y Preguntas
+
+*(Sin dudas registradas en esta sesión)*
